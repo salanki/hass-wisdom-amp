@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pywisdomamp"
+version = "0.1.0"
+description = "Async Python client for Wisdom Audio SA-3 DSP amplifiers over their WebSocket control protocol"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Peter Salanki" }]
+dependencies = ["aiohttp>=3.9"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "pytest-homeassistant-custom-component>=0.13",
+    "ruff>=0.4",
+    "homeassistant>=2024.11",
+]
+
+[tool.setuptools.package-dir]
+pywisdomamp = "custom_components/wisdom_amp/pywisdomamp"
+
+[tool.setuptools.packages]
+find = { where = ["custom_components/wisdom_amp"], include = ["pywisdomamp*"] }
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+# First entry lets tests import `pywisdomamp` as a top-level package; "." lets
+# them import `custom_components.wisdom_amp` for the HA integration tests.
+pythonpath = ["custom_components/wisdom_amp", "."]
+addopts = "-ra -m 'not live'"
+markers = [
+    "live: read-only tests that hit a real amplifier over WebSocket (opt-in, require WISDOM_AMP_HOST in env)",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"

@@ -1,0 +1,50 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Enter the management IP (or hostname) of the Wisdom SA-3 amplifier. The WebSocket control port is 81 unless you changed it. Note: this is the management-NIC IP, not the Dante audio IP.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      },
+      "reconfigure": {
+        "description": "Update the IP address or port for this amplifier. The MAC address must match the originally configured device.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the amplifier on the WebSocket port",
+      "no_mac": "The amplifier did not report a MAC address"
+    },
+    "abort": {
+      "already_configured": "This amplifier is already configured",
+      "wrong_device": "That host is a different amplifier (MAC mismatch)",
+      "reconfigure_successful": "Amplifier connection updated"
+    }
+  },
+  "entity": {
+    "number": {
+      "system_gain": { "name": "System gain" }
+    },
+    "switch": {
+      "power": { "name": "Power" }
+    },
+    "sensor": {
+      "power_state": {
+        "name": "Power state",
+        "state": {
+          "on": "On",
+          "off": "Off",
+          "transitioning": "Transitioning",
+          "unknown": "Unknown"
+        }
+      },
+      "firmware": { "name": "Firmware" },
+      "dante_name": { "name": "Dante name" }
+    }
+  }
+}

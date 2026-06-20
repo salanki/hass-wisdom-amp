@@ -1,0 +1,12 @@
+{
+  "domain": "wisdom_amp",
+  "name": "Wisdom SA-3 Amplifier",
+  "codeowners": ["@salanki"],
+  "config_flow": true,
+  "documentation": "https://github.com/salanki/hass-wisdom-amp",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/salanki/hass-wisdom-amp/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
