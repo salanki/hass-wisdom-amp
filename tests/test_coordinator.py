@@ -13,7 +13,7 @@ from .helpers import EAST_DECK_CFG, FakeClient
 async def test_discover_identity_channels_and_jack_groups():
     client = FakeClient()
     info = await async_discover(client)
-    assert info.mac == "8C:1F:64:D5:6C:86"
+    assert info.mac == "DE:AD:BE:EF:00:01"
     assert info.firmware == "03.02.71"
     assert info.dante_name == "Wisdom-East-Deck"
     # ch0 active (named), ch1 unused (empty name)

@@ -32,6 +32,6 @@ make check        # lint + test (CI gate)
 getFWinfo/getDanteInfo/cfgget). Excluded by default.
 
 ```bash
-export WISDOM_AMP_HOST=192.168.30.75   # management IP
+export WISDOM_AMP_HOST=192.168.1.50   # management IP
 make test-live
 ```

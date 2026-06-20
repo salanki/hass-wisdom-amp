@@ -6,7 +6,7 @@ import copy
 import re
 from typing import Any
 
-MAC = "8C:1F:64:D5:6C:86"
+MAC = "DE:AD:BE:EF:00:01"
 
 FWINFO: dict[str, Any] = {
     "app_ver": "03.02.71",
@@ -21,7 +21,7 @@ DANTE_INFO: dict[str, Any] = {"friendlyName": "Wisdom-East-Deck"}
 # East Deck snapshot: 1 active channel + 1 unused (empty name); 1 speaker on
 # jacks 1/2/3. Channel 0 carries an EQ band we assert survives a trim write.
 EAST_DECK_CFG: dict[str, Any] = {
-    "network": {"hostname": "Wisdom-East-Deck", "ipaddr": "192.168.30.75"},
+    "network": {"hostname": "Wisdom-East-Deck", "ipaddr": "192.168.1.50"},
     "gain": -10,
     "MainsOnAction": 1,
     "PowerSave": 0,
