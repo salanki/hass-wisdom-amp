@@ -65,12 +65,17 @@ class WisdomPowerSwitch(WisdomEntity, SwitchEntity):
 class WisdomMuteSwitch(WisdomEntity, SwitchEntity):
     """Mute a jack-group (speakers sharing the same output jacks).
 
-    Mutes are transient on the device (reset on reboot/reconnect); the
-    coordinator clears its model on reconnect to match.
+    Mute state is **write-only** on this protocol — it cannot be read back from
+    the amp (not in cfg, not pushed, no query), so this is an *assumed-state*
+    switch reflecting HA's own last command, not the device's true state. A mute
+    set elsewhere (e.g. the Wisdom web UI) will not be reflected here. HA only
+    sends mute changes on explicit service calls (never on reconnect), so it
+    won't clobber externally-set mutes.
     """
 
     _attr_device_class = SwitchDeviceClass.SWITCH
     _attr_icon = "mdi:volume-mute"
+    _attr_assumed_state = True
 
     def __init__(self, coordinator: WisdomCoordinator, group: JackGroup) -> None:
         super().__init__(coordinator, f"mute_{group.key}")

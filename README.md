@@ -36,8 +36,12 @@ upstream playback.
 - **Active channels** (those with a configured name) get trim/delay controls;
   unused channels are skipped.
 - **Mutes are grouped by output jack.** Speakers that share the same amp jacks
-  collapse into one mute switch. Mutes are *transient* on the device (reset on
-  reboot/reconnect); the integration clears its mute state on reconnect to match.
+  collapse into one mute switch. Mute state is **write-only** on this protocol —
+  it can't be read back — so the mute switches are *assumed-state* (they reflect
+  HA's own last command, not the amp). A mute set elsewhere (e.g. the Wisdom web
+  UI) won't be reflected, and HA only sends mute changes on an explicit toggle
+  (never on reconnect) so it won't undo externally-set mutes. Mutes clear on a
+  device reboot.
 - **Channel trim/delay writes use the device's indexed form** (`cfgset
   {"channels[N]": …}`, a fresh read-modify-write of the one channel). The
   whole-array form clears the channel list on the device — see

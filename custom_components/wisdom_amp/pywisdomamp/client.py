@@ -162,12 +162,13 @@ class WisdomClient:
                 self._ws = ws
                 self._fail_waiters(WisdomConnectionError("reconnected"))
                 self._ready.set()
-                # Transient mutes reset on (re)connect — sync the device to a
-                # known clean state and let the owner clear its model.
-                try:
-                    await ws.send_str("setmutes 0")
-                except Exception:  # noqa: BLE001
-                    pass
+                # NOTE: we deliberately do NOT send "setmutes 0" here. Mute state
+                # is write-only on this protocol (not readable anywhere), and the
+                # device keeps mutes across client connections — so forcing them
+                # off on reconnect would clobber mutes set elsewhere (e.g. the
+                # Wisdom web UI). HA only ever changes mutes on an explicit
+                # service call. (Mutes still clear on a device reboot, which we
+                # can't observe.)
                 if self._connected_once and self._reconnect_cb is not None:
                     self._reconnect_cb()
                 self._connected_once = True

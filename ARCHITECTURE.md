@@ -32,9 +32,9 @@ ack'd line protocol.
 - **Unsolicited frames go to callbacks**, never to request waiters: `pwrstate` →
   power callback; `cfgbusy`/unsolicited `cfg` → "config changed" callback. The
   client **does not** schedule its own refreshes.
-- On every (re)connect it sends `setmutes 0` (mutes are transient); on *reconnect*
-  it also fails pending waiters and fires a reconnect callback so the coordinator
-  resyncs.
+- On *reconnect* it fails pending waiters and fires a reconnect callback so the
+  coordinator re-reads config/power. It does **not** touch mutes on connect (mute
+  state is write-only and the device keeps it across connections — see below).
 - Uses HA's shared aiohttp session (passed in); `async_close()` cancels/awaits the
   reader and closes the socket.
 
@@ -54,7 +54,9 @@ ack'd line protocol.
   {...}}` (what the web app sends). The whole-array form `{"channels":[...]}`
   **clears** the channel list on the device — never use it.
 - **Mute** is a jack mask: muted jack-groups → OR of their jack bits → `setmutes`.
-  A jack is muted iff any muted group includes it, so overlapping groups compose
+  It is **write-only** (unreadable), so the switches are `assumed_state` and HA
+  only sends on explicit toggles (never on reconnect) to avoid clobbering mutes
+  set outside HA. A jack is muted iff any muted group includes it, so overlapping groups compose
   correctly.
 
 ## Entities

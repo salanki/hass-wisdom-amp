@@ -150,12 +150,9 @@ class WisdomCoordinator(DataUpdateCoordinator[WisdomStatus]):
 
     @callback
     def _on_reconnect(self) -> None:
-        # Device reset transient mutes on reconnect — clear our model to match.
-        self._muted_groups.clear()
-        if self.data is not None:
-            self.async_set_updated_data(
-                replace(self.data, muted_groups=frozenset())
-            )
+        # Re-read config/power after a reconnect. We intentionally keep the mute
+        # model as-is (mute state is write-only/unreadable and the device keeps
+        # mutes across reconnects — so we neither clear nor re-assert them).
         self.hass.async_create_task(self.async_request_refresh())
 
     # -- control helpers -------------------------------------------------

@@ -62,9 +62,15 @@ each band `{type:"peq", order:2, shape:"p", fc, Q, gain, bypass}`.
 1. **Channel writes must be indexed** (`channels[N]`); the whole-array form clears
    channels (see above). Residual race: an external edit inside the read→write
    window is unguarded (no firmware revision id).
-2. **Mutes are transient** — reset on reboot/reconnect. The client sends
-   `setmutes 0` on every connect and the coordinator clears its mute model on
-   reconnect.
+2. **Mute state is WRITE-ONLY.** `setmutes` sets a jack bitmask, but there is no
+   way to *read* current mutes — not in `cfg`, not pushed on connect (only
+   `pwrstate`+`log`), and no query verb (verified: `getmutes`/`getMutes`/`mutes`
+   return nothing). The official web UI also tracks mutes client-side. So HA's
+   mute switches are **assumed-state** (reflect HA's own last command, not the
+   amp) and a mute set elsewhere won't show. HA sends `setmutes` **only** on an
+   explicit service call — never on connect/reconnect — so it won't clobber
+   externally-set mutes. The device keeps mutes across client connections; they
+   clear on a device **reboot** (which HA can't observe).
 3. **Management IP ≠ Dante IP.** WebSocket is on the management NIC.
 4. **No auth** — anyone on the VLAN can read/write config, factory reset, or flash.
 5. **`pwrstate=2`** is transitioning → power switch reports unknown, not on/off.
