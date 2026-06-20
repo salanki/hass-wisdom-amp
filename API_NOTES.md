@@ -34,7 +34,8 @@ Pushed: `pwrstate {state:0|1|2}` (off/on/transitioning), `cfgbusy`, `rebooting`,
 ## Config fields this integration uses
 
 - `gain` — master gain (dB), scalar. Write `cfgset {"gain": v}`.
-- `channels[i].name` — empty ⇒ unused (no entities). `.trim` (dB), `.delay` (ms).
+- `channels[i].name` — empty ⇒ unused (no entities). `.trim` (dB), `.delay` (ms;
+  firmware max **35 ms**).
 - `speakers[i].definition.drivers[].jack` — physical output jacks → mute groups.
 - `network.hostname` — display name fallback.
 

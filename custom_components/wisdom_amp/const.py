@@ -19,6 +19,7 @@ TRIM_MIN = -12.0
 TRIM_MAX = 12.0
 TRIM_STEP = 0.5
 
+# Wisdom firmware caps channel delay at 35 ms.
 DELAY_MIN = 0.0
-DELAY_MAX = 100.0
+DELAY_MAX = 35.0
 DELAY_STEP = 0.1
