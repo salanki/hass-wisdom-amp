@@ -12,6 +12,7 @@ from .models import (
     JackGroup,
     WisdomInfo,
     WisdomStatus,
+    model_from_fw,
     power_from_pwrstate,
 )
 
@@ -30,5 +31,6 @@ __all__ = [
     "WisdomInfo",
     "WisdomStatus",
     "WisdomTimeoutError",
+    "model_from_fw",
     "power_from_pwrstate",
 ]

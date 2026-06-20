@@ -15,7 +15,8 @@ custom_components/wisdom_amp/
 
 ## Why this is harder than the Blaze sibling
 
-The SA-3 is **one WebSocket with mixed push + response and no request IDs**. The
+The Wisdom DSP amps (SA / IA line) expose **one WebSocket with mixed push +
+response and no request IDs** (the model is auto-detected from the firmware). The
 same verbs that answer a request (`cfg`) are *also* pushed unsolicited (a flood of
 `log` on connect, `pwrstate`, `cfgbusy`, and `cfg` after a config apply). So the
 client/coordinator boundary needs stricter synchronisation than Blaze's serialized

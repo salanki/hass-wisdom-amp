@@ -1,6 +1,6 @@
 {
   "domain": "wisdom_amp",
-  "name": "Wisdom SA-3 Amplifier",
+  "name": "Wisdom Amplifier",
   "codeowners": ["@salanki"],
   "config_flow": true,
   "documentation": "https://github.com/salanki/hass-wisdom-amp",

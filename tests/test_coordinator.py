@@ -15,6 +15,7 @@ async def test_discover_identity_channels_and_jack_groups():
     info = await async_discover(client)
     assert info.mac == "DE:AD:BE:EF:00:01"
     assert info.firmware == "03.02.71"
+    assert info.model == "SA-3"  # derived from app_fw "SA3-..."
     assert info.dante_name == "Wisdom-East-Deck"
     # ch0 active (named), ch1 unused (empty name)
     assert [c.active for c in info.channels] == [True, False]
@@ -35,6 +36,15 @@ def test_jack_groups_collapse_identical_and_keep_distinct():
     keys = {g.key: g for g in groups}
     assert set(keys) == {"jacks_1_2", "jacks_3"}
     assert keys["jacks_1_2"].name == "L / R"  # identical jack-sets collapse
+
+
+def test_model_from_fw():
+    from custom_components.wisdom_amp.pywisdomamp import model_from_fw
+
+    assert model_from_fw("SA3-SC-RP2040_AIDE.ino.bin.gz") == "SA-3"
+    assert model_from_fw("SA2-SC-RP2040_AIDE.ino.bin.gz") == "SA-2"
+    assert model_from_fw("IA8MK2-SC-RP2040_AIDE.ino.bin.gz") == "IA-8 MK2"
+    assert model_from_fw(None) == "DSP amplifier"
 
 
 async def test_discover_requires_mac():

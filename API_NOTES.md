@@ -1,8 +1,10 @@
-# Wisdom SA-3 control protocol notes
+# Wisdom DSP amplifier control protocol notes
 
-Reverse-engineered and verified live (read-only) against the East Deck SA-3
-(firmware 03.02.71, RP2040). Full device docs live in the home-automation repo at
-`115beach/ha/wisdom-amplifiers.md`; this is the integration-facing summary.
+Reverse-engineered and verified live (read-only) against Wisdom **SA-2 / SA-3 /
+IA-8 MK2** units (RP2040 firmware) — the SA / IA DSP line shares one protocol. The
+model is auto-detected from `fwinfo.app_fw` (e.g. `SA3-…` → `SA-3`, `IA8MK2-…` →
+`IA-8 MK2`). This is the integration-facing summary; fuller device notes live in
+the home-automation repo at `115beach/ha/wisdom-amplifiers.md`.
 
 ## Transport
 

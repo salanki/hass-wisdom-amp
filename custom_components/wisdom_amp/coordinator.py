@@ -21,6 +21,7 @@ from .pywisdomamp import (
     WisdomInfo,
     WisdomStatus,
     WisdomError,
+    model_from_fw,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -83,6 +84,7 @@ async def async_discover(client: WisdomClient) -> WisdomInfo:
     )
     return WisdomInfo(
         mac=mac,
+        model=model_from_fw(fw.get("app_fw")),
         firmware=fw.get("app_ver"),
         platform=fw.get("app_plfm"),
         hostname=cfg.get("network", {}).get("hostname"),

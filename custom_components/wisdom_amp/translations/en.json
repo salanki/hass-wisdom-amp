@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "description": "Enter the management IP (or hostname) of the Wisdom SA-3 amplifier. The WebSocket control port is 81 unless you changed it. Note: this is the management-NIC IP, not the Dante audio IP.",
+        "description": "Enter the management IP (or hostname) of the Wisdom DSP amplifier (SA-2/SA-3, IA-8, etc.). The WebSocket control port is 81 unless you changed it. Note: this is the management-NIC IP, not the Dante audio IP.",
         "data": {
           "host": "Host",
           "port": "Port"

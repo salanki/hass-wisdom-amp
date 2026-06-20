@@ -13,6 +13,7 @@ FWINFO: dict[str, Any] = {
     "app_type": 2,
     "app_date": "Mar  9 2026",
     "app_plfm": "RP2040",
+    "app_fw": "SA3-SC-RP2040_AIDE.ino.bin.gz",
     "MAC": MAC,
 }
 

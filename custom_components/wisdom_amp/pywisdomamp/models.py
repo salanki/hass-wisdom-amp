@@ -6,7 +6,26 @@ only needs a small typed projection of the full ``cfg`` document.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
+
+
+def model_from_fw(app_fw: str | None) -> str:
+    """Derive a friendly model from ``fwinfo.app_fw``.
+
+    The firmware blob name encodes the model, e.g. ``SA3-SC-RP2040_AIDE...`` →
+    ``SA-3``, ``SA2-...`` → ``SA-2``, ``IA8MK2-...`` → ``IA-8 MK2``. Falls back to
+    a generic label for unknown firmware names.
+    """
+    if not app_fw:
+        return "DSP amplifier"
+    code = app_fw.split("-", 1)[0]  # SA3 / SA2 / IA8MK2 / ...
+    m = re.fullmatch(r"([A-Za-z]+)(\d+)(MK\d+)?", code)
+    if not m:
+        return code or "DSP amplifier"
+    base, num, mk = m.group(1), m.group(2), m.group(3)
+    return f"{base}-{num}" + (f" {mk}" if mk else "")
+
 
 # Power states (from the pushed ``pwrstate`` frame).
 POWER_ON = "on"
@@ -49,7 +68,7 @@ class WisdomInfo:
     """Static device identity + topology, read once at setup."""
 
     mac: str
-    model: str = "SA-3"
+    model: str = "DSP amplifier"
     firmware: str | None = None
     platform: str | None = None
     hostname: str | None = None
