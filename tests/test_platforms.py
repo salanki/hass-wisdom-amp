@@ -31,7 +31,7 @@ async def test_gain_out_of_range_rejected(hass, setup_integration):
     eid = _eid(hass, "number", "system_gain")
     with pytest.raises(ServiceValidationError):
         await hass.services.async_call(
-            "number", "set_value", {"entity_id": eid, "value": 6}, blocking=True
+            "number", "set_value", {"entity_id": eid, "value": 12}, blocking=True
         )
     assert client.cfgsets == []
 

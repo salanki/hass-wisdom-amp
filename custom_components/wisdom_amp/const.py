@@ -9,9 +9,9 @@ DOMAIN = "wisdom_amp"
 DEFAULT_PORT = 81
 DEFAULT_SCAN_INTERVAL = timedelta(seconds=45)
 
-# System (master) gain slider — Wisdom default is -10 dB; 0 dB = unity ceiling.
+# System (master) gain slider — Wisdom default is -10 dB; allow up to +6 dB boost.
 GAIN_MIN = -60.0
-GAIN_MAX = 0.0
+GAIN_MAX = 6.0
 GAIN_STEP = 0.5
 
 # Per-channel trim (dB) and delay (ms) ranges.

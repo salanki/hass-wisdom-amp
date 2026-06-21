@@ -26,7 +26,7 @@ upstream playback.
 
 | Entity | What it does |
 |---|---|
-| `number` System gain | Master output gain `cfg.gain` (dB), slider −60…0 |
+| `number` System gain | Master output gain `cfg.gain` (dB), slider −60…+6 |
 | `number` `<channel>` trim | Per active channel `trim` (dB) |
 | `number` `<channel>` delay | Per active channel `delay` (ms) |
 | `switch` Power | `on`/`off`; live state from the pushed `pwrstate` frame |
