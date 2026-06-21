@@ -15,8 +15,8 @@ GAIN_MAX = 6.0
 GAIN_STEP = 0.5
 
 # Per-channel trim (dB) and delay (ms) ranges.
-TRIM_MIN = -12.0
-TRIM_MAX = 12.0
+TRIM_MIN = -60.0
+TRIM_MAX = 10.0
 TRIM_STEP = 0.5
 
 # Wisdom firmware caps channel delay at 35 ms.
