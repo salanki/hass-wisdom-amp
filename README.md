@@ -27,8 +27,8 @@ upstream playback.
 | Entity | What it does |
 |---|---|
 | `number` System gain | Master output gain `cfg.gain` (dB), slider −60…+6 |
-| `number` `<channel>` trim | Per active channel `trim` (dB) |
-| `number` `<channel>` delay | Per active channel `delay` (ms) |
+| `number` `<channel>` trim | Per active channel `trim` (dB), −60…+10 |
+| `number` `<channel>` delay | Per active channel `delay` (ms), 0…35 (firmware cap) |
 | `switch` Power | `on`/`off`; live state from the pushed `pwrstate` frame |
 | `switch` `<speaker>` mute | Mute a jack-group via `setmutes` (transient — see notes) |
 | `sensor` (diagnostic) | Power state, firmware, Dante name; MAC + detected model in device info |
